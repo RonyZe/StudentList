@@ -1,0 +1,1 @@
+INSERT INTO Students VALUES('Lahore','One', convert(datetime,'18-06-12 10:34:09 PM',5), 'Raza','Ali')
