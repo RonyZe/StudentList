@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StudentList.Models;
 
 namespace StudentList
 {
@@ -22,6 +24,7 @@ namespace StudentList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddDbContext<MyDbContext>(options=>options.UseSqlServer(@"Data Source=DESKTOP-P6EKFAH\SQLEXPRESS;Initial Catalog=StudentList;Integrated Security=True", b=>b.UseRowNumberForPaging()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
