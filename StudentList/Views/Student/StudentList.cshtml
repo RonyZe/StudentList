@@ -6,8 +6,17 @@
 }
 <h2>StudentList</h2>
 
-SearchByDate: <input type="date" name="bday">
+@* SearchByDate: <input type="date" name="bday"> *@
 
+@*SearchByDate: <input type="date" class="form-control">*@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="input-group">
+            <label class="form-inline">SearchByDate:</label><input type="date" class="form-control" placeholder="Search for...">
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div>
+<br/>
 <table id="table_id" class="display" style="width:100%">
     <thead>
         <tr>
@@ -37,7 +46,7 @@ SearchByDate: <input type="date" name="bday">
             <th>FatherName</th>
             <th>Class</th>
             <th>Address</th>
-            <th>Date of Birth</th>       
+            <th>Date of Birth</th>
         </tr>
     </tfoot>
 </table>

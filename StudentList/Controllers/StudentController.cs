@@ -22,5 +22,15 @@ namespace StudentList.Controllers
             return View(studentList);
         }
 
+        public JsonResult SearchForStudent(DateTime searchKeyword)
+        {
+            
+            var studentList = context.Students.ToList().Where(x=>x.DateOfBirth == searchKeyword);
+            //var jsonStudents = Json(studentList.Where(x =>
+            //{
+            //    x.DateOfBirth == searchKeyword;
+            //}));
+            return Json(studentList);
+        }
     }
 }
