@@ -35,6 +35,10 @@ namespace StudentList.Controllers
 
         public JsonResult SearchForName(string search, DateTime searchDate)
         {
+            if (search==null)
+            {
+                search = "";
+            }
 
             var studentList = context.Students.Where(x => x.Name.Contains(search) || x.FatherName.Contains(search) || x.Address.Contains(search) || x.Class.Contains(search) || x.DateOfBirth == searchDate).ToList();
 

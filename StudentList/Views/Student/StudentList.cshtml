@@ -81,7 +81,7 @@
 
             function Search(keyword) {
 
-                var minLength = 1;
+                var minLength = 0;
 
                 if (keyword.length >= minLength) {
 
@@ -119,9 +119,9 @@
 
                         },
 
-                        complete: function () {
-                            $("#search-student").html(allStudentsByKeyword);
-                        }
+//                        complete: function () {
+//                            $("#search-student").html(allStudentsByKeyword);
+//                        }
                     });
                 }
 
