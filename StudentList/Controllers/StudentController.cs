@@ -24,13 +24,24 @@ namespace StudentList.Controllers
 
         public JsonResult SearchForStudent(DateTime searchKeyword)
         {
-            
-            var studentList = context.Students.ToList().Where(x=>x.DateOfBirth == searchKeyword);
+
+            var studentList = context.Students.Where(x => x.DateOfBirth == searchKeyword).ToList();
             //var jsonStudents = Json(studentList.Where(x =>
             //{
             //    x.DateOfBirth == searchKeyword;
             //}));
             return Json(studentList);
         }
+
+        public JsonResult SearchForName(string search, DateTime searchDate)
+        {
+
+            var studentList = context.Students.Where(x => x.Name.Contains(search) || x.FatherName.Contains(search) || x.Address.Contains(search) || x.Class.Contains(search) || x.DateOfBirth == searchDate).ToList();
+
+            return Json(studentList);
+        }
+
+
+
     }
 }

@@ -9,6 +9,23 @@
 @* SearchByDate: <input type="date" name="bday"> *@
 
 @*SearchByDate: <input type="date" class="form-control">*@
+
+@*@using (Html.BeginForm("StudentList", "Student", FormMethod.Get))
+    {
+        @Html.TextBox("")<input type="submit" value="search"/>
+    }*@
+
+<div class="row">
+    <div class="col-lg-6">
+        SearchByName:<input type="text" id="search-student" class="form-control">
+    </div>
+</div>
+
+@* <p class="suggestion"></p> *@
+
+
+<br/>
+
 <div class="row">
     <div class="col-lg-6">
         <div class="input-group">
@@ -16,40 +33,36 @@
         </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->
 </div>
-<br/>
+<br />
+
+
+
+
 <table id="table_id" class="display" style="width:100%">
     <thead>
-        <tr>
-            <th>StudentName</th>
-            <th>FatherName</th>
-            <th>Class</th>
-            <th>Address</th>
-            <th>Date of Birth</th>
-        </tr>
+    <tr>
+        <th>StudentName</th>
+        <th>FatherName</th>
+        <th>Class</th>
+        <th>Address</th>
+        <th>Date of Birth</th>
+    </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.FatherName</td>
-                <td>@item.Class</td>
-                <td>@item.Address</td>
-                <td>@item.DateOfBirth</td>
-            </tr>
-        }
+    <tbody id="stuTbl">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.FatherName</td>
+            <td>@item.Class</td>
+            <td>@item.Address</td>
+            <td>@item.DateOfBirth</td>
+        </tr>
+    }
 
     </tbody>
-    <tfoot>
-        <tr>
-            <th>StudentName</th>
-            <th>FatherName</th>
-            <th>Class</th>
-            <th>Address</th>
-            <th>Date of Birth</th>
-        </tr>
-    </tfoot>
 </table>
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 @section Scripts
     {
@@ -57,22 +70,62 @@
 
     <script>
         $(document).ready(function () {
-            $('#table_id').DataTable(
-                {
-                    //                    "ajax": {
-                    //                        "url": "/Student/GetList",
-                    //                        "type": "GET",
-                    //                        "datatype": "json"
-                    //                    },
-                    //                    "columns": [
-                    //                        { "data": "Name" },
-                    //                        { "data": "Position" },
-                    //                        { "data": "Office" },
-                    //                        { "data": "Age" },
-                    //                        { "data": "Salary" }
-                    //                    ]
+            $('#table_id').DataTable();
 
-                });
+            $(document).on("keyup", "#search-student", function () {
+
+                var keyword = $(this).val();
+
+                Search(keyword);
+            });
+
+            function Search(keyword) {
+
+                var minLength = 1;
+
+                if (keyword.length >= minLength) {
+
+                    //var allStudentsByKeyword = "";
+
+                    var allStudentsByKeyword = "";
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Student/SearchForName",
+                        data: { search: keyword, searchDate: keyword},
+                        success: function (response) {
+                            //$('#table_id').children().remove();
+                            $('#table_id').DataTable().clear();
+                            $('#table_id').DataTable().destroy();
+                            if (response) {
+                                
+                                $.each(response,
+                                    function (i, item) {
+                                        
+                                        allStudentsByKeyword = "<tr>" +
+                                            //"<td>" + item.id + "</td>" +
+                                            "<td>" + item.name + "</td>" +
+                                            "<td>" + item.fatherName + "</td>" +
+                                            "<td>" + item.class + "</td>" +
+                                            "<td>" + item.address + "</td>" +
+                                            "<td>" + item.dateOfBirth + "</td>" +
+                                            "</tr>";
+                                        $('#table_id').append(allStudentsByKeyword);
+                                    });
+                                
+                                setTimeout(function () { $('#table_id').DataTable();}, 100);
+
+                            }
+
+                        },
+
+                        complete: function () {
+                            $("#search-student").html(allStudentsByKeyword);
+                        }
+                    });
+                }
+
+            };
 
         });
     </script>

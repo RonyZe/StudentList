@@ -26,7 +26,7 @@ namespace StudentList
             services.AddMvc();
             services.AddDbContext<MyDbContext>(options=>
                 
-            options.UseSqlServer(@"Data Source=DESKTOP-6HKI2I8\SQLEXPRESS;Initial Catalog=StudentList;Integrated Security=True", b=>b.UseRowNumberForPaging()));
+            options.UseSqlServer(@"Data Source=DESKTOP-P6EKFAH\SQLEXPRESS;Initial Catalog=StudentList;Integrated Security=True", b=>b.UseRowNumberForPaging()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
