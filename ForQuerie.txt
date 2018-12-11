@@ -1,1 +1,12 @@
 INSERT INTO Students VALUES('Lahore','One', convert(datetime,'18-06-12 10:34:09 PM',5), 'Raza','Ali')
+INSERT INTO Students
+VALUES ('Gulberg, Lahore','One', convert(datetime,'18-06-12 10:34:09 PM',5), 'Ali', 'Raza')
+
+INSERT INTO Students
+VALUES ('Mughalpura, Lahore','Two', convert(datetime,'1-08-11 1:34:09 PM',5), 'Rehman', 'Nabeel')
+
+INSERT INTO Students
+VALUES ('Kalma Chowk, Lahore','Three', convert(datetime,'4-01-14 2:33:19 PM',5), 'Hassan', 'Ahmed')
+
+INSERT INTO Students
+VALUES ('Mall Road, Lahore','Three', convert(datetime,'8-09-19 1:34:09 PM',5), 'Johar', 'Zaman')
